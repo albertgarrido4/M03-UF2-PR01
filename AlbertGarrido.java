@@ -3,7 +3,12 @@ import java.util.Scanner;
 
 public class AlbertGarrido {
     public static void main(String[] args) {
-        int transferibles[][] = new int[3][5];
+        int equip[][] = new int[32][5];
+        String[] nombreEquips = {"Napoli", "Ajax", "Liverpool", "Rangers", "Oporto", "Brujas", "Bayer04", "A.Madrid", "FC Bayern", "Inter", "FC Barcelona", "Viktoria plzen", "Spurs", "Eintracht", "S.Portugal", "Marseille", "Chelsea", "AC Milan", "Salzburgo", "D.Zagreb", "R.Madrid", "RB Leipzig", "Shaktar D.", "Celtic", "Man. City", "B.Dortmund", "Sevilla", "Copenhagen", "Benfica", "PSG", "Juventus", "Maccabi Haifa"};
+
+        j1(equip,nombreEquips);
+
+       /* int transferibles[][] = new int[3][5];
         transferibles[0][0]=1;
         transferibles[0][1]= Integer.parseInt("Bernardo Silva");
         transferibles[0][2]=50;
@@ -24,7 +29,7 @@ public class AlbertGarrido {
         int presupost = 100;
         int preuJugador = 20;
 
-
+*/
     }
 
     /**Métode per mostrar un missatge parametritzat per pantalla i mostrar un menú funcional.
@@ -193,8 +198,7 @@ return presupost;
     }
     private static int[][] mostrarGrups(){
         //TODO Desenvolupar metode per fer el sorteig dels grups.
-        int[][] equip = new int[4][5];
-        String[] nombresEquips = {"Napoli", "Ajax", "Liverpool", "Rangers", "Oporto", "Brujas", "Bayer04", "Inter", "FC Barcelona", "Viktoria plzen", "Spurs", "Eintracht", "S.Portugal", "Marseille", "Chelsea", "AC Milan", "Salzburgo", "D.Zagreb", "R.Madrid", "Shaktar D.", "Celtic", "Man. City", "B.Dortmund", "Sevilla", "Copenhagen", "Benfica", "PSG", "Juventus", "Maccabi Haifa"};
+        int[][] equip = new int[32][5];
 
         //GRUP A
 
@@ -409,20 +413,109 @@ return presupost;
     private static void j1(int[][] equip,String[]nombreEquips){
 
 
-        //NAPOLI-AJAX
-        System.out.println(nombreEquips[0]+" VS "+nombreEquips[1]);
+
         int equipLocal = 0;
-        int equipVisitant = 1;
+        int equipVisitant = 0;
+
+        //Dortmund-Copenhagen
+        System.out.println(nombreEquips[25]+" VS "+nombreEquips[27]);
+        equipLocal = 25;
+        equipVisitant = 27;
         calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
-        //Liverpool-Rangers
-        System.out.println(nombreEquips[2]+" VS "+nombreEquips[3]);
-        equipLocal = 2;
+
+        //Dinamo Zagreb-Chelsea
+        System.out.println(nombreEquips[19]+" VS "+nombreEquips[16]);
+        equipLocal = 25;
+        equipVisitant = 27;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //Benfica-Maccabi Haifa
+        System.out.println(nombreEquips[28]+" VS "+nombreEquips[31]);
+        equipLocal = 28;
+        equipVisitant = 31;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //Celtic-Real Madrid
+        System.out.println(nombreEquips[23]+" VS "+nombreEquips[20]);
+        equipLocal = 23;
+        equipVisitant = 20;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //Salzburg-AC Milan
+        System.out.println(nombreEquips[18]+" VS "+nombreEquips[17]);
+        equipLocal = 19;
+        equipVisitant = 17;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //PSG-Juventus
+        System.out.println(nombreEquips[29]+" VS "+nombreEquips[30]);
+        equipLocal = 29;
+        equipVisitant = 30;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //RB Leipzig-Shaktar D.
+        System.out.println(nombreEquips[21]+" VS "+nombreEquips[22]);
+        equipLocal = 21;
+        equipVisitant = 22;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //Sevilla-Man City
+        System.out.println(nombreEquips[26]+" VS "+nombreEquips[24]);
+        equipLocal = 26;
+        equipVisitant = 24;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //AJAX-Rangers
+        System.out.println(nombreEquips[1]+" VS "+nombreEquips[3]);
+        equipLocal = 1;
         equipVisitant = 3;
         calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //Eintracht-S.Portugal
+        System.out.println(nombreEquips[13]+" VS "+nombreEquips[14]);
+        equipLocal = 13;
+        equipVisitant = 14;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //A.Madrid-Oporto
+        System.out.println(nombreEquips[7]+" VS "+nombreEquips[4]);
+        equipLocal = 7;
+        equipVisitant = 4;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //FC Barceclona-Viktoria Plzen
+        System.out.println(nombreEquips[10]+" VS "+nombreEquips[11]);
+        equipLocal = 10;
+        equipVisitant = 11;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //Brujas-Bayer04
+        System.out.println(nombreEquips[5]+" VS "+nombreEquips[6]);
+        equipLocal = 5;
+        equipVisitant = 6;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //Inter-FC Bayern
+        System.out.println(nombreEquips[9]+" VS "+nombreEquips[8]);
+        equipLocal = 9;
+        equipVisitant = 8;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //Napoli-Liverpool
+        System.out.println(nombreEquips[0]+" VS "+nombreEquips[2]);
+        equipLocal = 0;
+        equipVisitant = 2;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
+        //SPURS-Marseille
+        System.out.println(nombreEquips[12]+" VS "+nombreEquips[15]);
+        equipLocal = 12;
+        equipVisitant = 15;
+        calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
+
         for (int i = 0; i < equip.length; i++) {
             System.out.println(nombreEquips[i] + " - Victorias: " + equip[i][1] + " - Empates: " + equip[i][2] + " - Derrotas: " + equip[i][3] + " - PTS: " + equip[i][4]);
         }
-
     }
 
     public static int getRandomNumberUsingNextInt(int min, int max) {
@@ -434,23 +527,23 @@ return presupost;
         int max = 5;
         int golsEquipLocal = getRandomNumberUsingNextInt(min,max);
         int golsEquipVisitant = getRandomNumberUsingNextInt(min,max);
-        System.out.println(equip[equipLocal][0]+" "+golsEquipLocal+"\t"+ equip[equipVisitant][0]+" "+golsEquipVisitant);
+        System.out.println(golsEquipLocal+" - "+ golsEquipVisitant);
         if (golsEquipLocal > golsEquipVisitant){
             equip[equipLocal][4] = equip[equipLocal][4] + 3;
-            equip[equipLocal][1] = equip[equipLocal][1] ++;
-            equip[equipVisitant][3] = equip[equipVisitant][3] ++;
+            equip[equipLocal][1] = equip[equipLocal][1] +1;
+            equip[equipVisitant][3] = equip[equipVisitant][3] +1;
 
 
         } else if (golsEquipLocal < golsEquipVisitant) {
             equip[equipVisitant][4] = equip[equipVisitant][4] +3;
-            equip[equipVisitant][1] = equip[equipVisitant][1] ++;
-            equip[equipLocal][3] = equip[equipLocal][3]++;
+            equip[equipVisitant][1] = equip[equipVisitant][1] +1;
+            equip[equipLocal][3] = equip[equipLocal][3]+1;
 
         }else {//Empate
-            equip[equipLocal][2] = equip[equipLocal][2] ++;
-            equip[equipVisitant][2] = equip[equipVisitant][2] ++;
-            equip[equipLocal][4] = equip[equipLocal][4] ++;
-            equip[equipVisitant][4] = equip[equipVisitant][4] ++;
+            equip[equipLocal][2] = equip[equipLocal][2] +1;
+            equip[equipVisitant][2] = equip[equipVisitant][2] +1;
+            equip[equipLocal][4] = equip[equipLocal][4] +1;
+            equip[equipVisitant][4] = equip[equipVisitant][4] +1;
 
         }
     }
