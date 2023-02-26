@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -6,88 +8,46 @@ public class AlbertGarrido {
 
         int equip[][] = new int[32][5];
         String[] nombreEquips = {"Napoli", "Ajax", "Liverpool", "Rangers", "Oporto", "Brujas", "Bayer04", "A.Madrid", "FC Bayern", "Inter", "FC Barcelona", "Viktoria plzen", "Spurs", "Eintracht", "S.Portugal", "Marseille", "Chelsea", "AC Milan", "Salzburgo", "D.Zagreb", "R.Madrid", "RB Leipzig", "Shaktar D.", "Celtic", "Man. City", "B.Dortmund", "Sevilla", "Copenhagen", "Benfica", "PSG", "Juventus", "Maccabi Haifa"};
+        ArrayList<String> bombo1Vuitens = new ArrayList<>(7);
+        ArrayList<String> bombo2Vuitens = new ArrayList<>(7);
+        int golsEquipLocal = 0;
+        int golsEquipVisitant = 0;
+        String[]bomboQuarts = new String[8];
+        String[]bomboSemis = new String[4];
+        String[]bomboFinal = new String[2];
 
-        j1(equip,nombreEquips);
-        j2(equip,nombreEquips);
-        j3(equip,nombreEquips);
-        j4(equip,nombreEquips);
-        j5(equip,nombreEquips);
-        j6(equip,nombreEquips);
-
-       /* int transferibles[][] = new int[3][5];
-        transferibles[0][0]=1;
-        transferibles[0][1]= Integer.parseInt("Bernardo Silva");
-        transferibles[0][2]=50;
-        transferibles[1][0]=2;
-        transferibles[1][1]= Integer.parseInt("Earling Haland");
-        transferibles[1][2]=200;
-        transferibles[2][0]=3;
-        transferibles[2][1]= Integer.parseInt("Ibrahimovic");
-        transferibles[2][2]=5;
-        transferibles[3][0]= 4;
-        transferibles[3][1]= Integer.parseInt("Mohamed Salah");
-        transferibles[3][2]= 50;
+        menuPrincipal(equip,nombreEquips,bombo1Vuitens,bombo2Vuitens,bomboQuarts,bomboSemis,bomboFinal);
 
 
 
-        Scanner llegir = new Scanner(System.in);
-        int equipSeleccionat = 0;
-        int presupost = 100;
-        int preuJugador = 20;
 
-*/
-    }
+
+
+
+        }
 
     /**Métode per mostrar un missatge parametritzat per pantalla i mostrar un menú funcional.
      *
      */
-    private static void menuTransferibles(){
-        seleccionarEquip();
-        final String MISSATGE = "(1)Comprar Jugadors\n(2)Vendre Jugadors \n(3)Iniciar temporada \n(4)Veure grups";
-        int opcio = 0;
-        int min = 0;
-        int max = 3;
-
-        do {
-            opcio = llegirInt(MISSATGE, min,max);
-
-            switch (opcio) {
-                case 1://Transferibles
-                   int opcioTransferibles = llegirInt(MISSATGE,min,max);
-                    switch (opcioTransferibles){
-                        case 1://Comprar
-                            //comprarJugador();
-                            break;
-                        case 2://Vendre
-                            //vendreJugador(int presupost)
-                            break;
-                    }
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-            }
-        }while (opcio !=3);
+    private static void menuPrincipal(int[][]equip,String[]nombreEquips,ArrayList<String>bombo1Vuitens,ArrayList<String>bombo2Vuitens,String[]bomboQuarts, String[]bomboSemis,String[]bomboFinal){
+        jornada1(equip,nombreEquips);
+        jornada2(equip,nombreEquips);
+        jornada3(equip,nombreEquips);
+        jornada4(equip,nombreEquips);
+        jornada5(equip,nombreEquips);
+        jornada6(equip,nombreEquips);
+        mostrarClassificacio(equip,nombreEquips);
+        sorteigVuitens(equip,nombreEquips,bombo1Vuitens, bombo2Vuitens);
+        sorteigVuitens(bombo1Vuitens, bombo2Vuitens);
+        calcularGuanyadorVuitens(bombo1Vuitens,bombo2Vuitens,bomboQuarts);
+        sorteigQuarts(bomboQuarts);
+        calcularGuanyadorQuarts(bomboQuarts,bomboSemis);
+        enfrontamentSemis(bomboSemis);
+        calcularSemis(bomboSemis,bomboFinal);
+        calcularFinal(bomboFinal);
     }
 
-    private static void menuTemporada(){
-        final String MISSATGE_TEMPORADA = "(1)Jugar partit \n (2)Canviar alineació \n (3)Mostrar resultats";
-        int min = 1;
-        int max = 3;
-        boolean exit;
-        int[][] grupA = new int[4][5];
-        int opcioTemporada = llegirInt(MISSATGE_TEMPORADA,min,max);
-        switch (opcioTemporada){
-            case 1://métode jugar partit
-                //j1(grupA);
-                exit = true;
-                break;
-            case 2://canviar alineacio
-                break;
-            case 3://veure resultats
-        }
-    }
+
 
 
 
@@ -123,74 +83,7 @@ public class AlbertGarrido {
     }
 
 
-
-    private static int mercatTransferibles() {
-        Scanner llegir = new Scanner(System.in);
-        System.out.println("Quin jugador vols comprar?");
-        //TODO SOUT DEL MERCAT
-        //fer una matriu dels jugadors
-        int jugadorEscollit = llegir.nextInt();
-
-
-        return jugadorEscollit;
-    }
-
-    private static void menuPrincipal(){
-        int min = 1;
-        int max = 3;
-        int opcio = 0;
-        String missatge= "Selecciona una opció: \n (1)Seleccionar equip (2)Fer plantilla (3)Continuar";
-        opcio = llegirInt(missatge,min,max);
-        switch (opcio){
-            case 1:
-                seleccionarEquip();
-                break;
-            case 2:
-                mercatTransferibles();
-            case 3:
-                break;
-        }
-
-
-        //TODO
-    }
-    /**Mètode que s'executarà a l'iniciar el progrgama
-     * servirà per fer que l'usuari seleccioni l'equip que vol
-     * @return equip
-     */
-    private static int seleccionarEquip(){
-        final String MISSATGE_SELECCIO_EQUIP = "selecciona l'equip amb el que vols jugar :\n (1)F.C.Barcelona\n(2)Real Madrid\n(3)Real Sociedad\n(4)Atlético de Madrid";
-        int min = 0;
-        int max = 4;
-        int equipUsuari = 0;
-        int opcioEquip = llegirInt(MISSATGE_SELECCIO_EQUIP,min,max);
-        switch (opcioEquip){
-
-            case 1://Barça
-                opcioEquip = 1;
-                System.out.println("Has escollit 'F.C.Barcelona'");
-                equipUsuari = 1;
-            case 2://Madrid
-                opcioEquip = 2;
-                 }
-        return opcioEquip;
-
-    }
-    private static int comprarJugador(int presupost, int jugadorEscollit, int[][]transferibles){
-        presupost=presupost-transferibles[jugadorEscollit][3];
-        System.out.println("Et queden "+presupost+"M");
-
-
-        return presupost;
-    }
-    private static int vendreJugador(int presupost, int jugadorVenta){
-        presupost = presupost + presupost;
-        jugadorVenta = Integer.parseInt(null);
-
-
-return presupost;
-    }
-    private static int[][] mostrarGrups(){
+       private static int[][] mostrarGrups(){
         //TODO Desenvolupar metode per fer el sorteig dels grups.
         int[][] equip = new int[32][5];
 
@@ -404,7 +297,7 @@ return presupost;
         return equip;
     }
 
-    private static void j1(int[][] equip,String[]nombreEquips){
+    private static void jornada1(int[][] equip, String[]nombreEquips){
 
 
 
@@ -509,7 +402,7 @@ return presupost;
 
 
     }
-    public static void j2(int[][] equip,String[]nombreEquips){
+    public static void jornada2(int[][] equip, String[]nombreEquips){
 
         int equipLocal = 0;
         int equipVisitant = 0;
@@ -612,7 +505,7 @@ return presupost;
 
     }
 
-    public static void j3(int[][] equip,String[]nombreEquips){
+    public static void jornada3(int[][] equip, String[]nombreEquips){
 
         int equipLocal = 0;
         int equipVisitant = 0;
@@ -716,7 +609,7 @@ return presupost;
 
 
     }
-    public static void j4(int[][] equip,String[]nombreEquips){
+    public static void jornada4(int[][] equip, String[]nombreEquips){
 
         int equipLocal = 0;
         int equipVisitant = 0;
@@ -819,7 +712,7 @@ return presupost;
 
 
     }
-    public static void j5(int[][] equip,String[]nombreEquips){
+    public static void jornada5(int[][] equip, String[]nombreEquips){
 
         int equipLocal = 0;
         int equipVisitant = 0;
@@ -924,7 +817,7 @@ return presupost;
 
     }
 
-    public static void j6(int[][] equip,String[]nombreEquips){
+    public static void jornada6(int[][] equip, String[]nombreEquips){
 
         int equipLocal = 0;
         int equipVisitant = 0;
@@ -1025,14 +918,177 @@ return presupost;
         equipVisitant = 18;
         calcularResultat(equip,equipLocal,equipVisitant,nombreEquips);
 
-        for (int i = 0; i < equip.length; i++) {
-            System.out.println(nombreEquips[i] + " - Victories: " + equip[i][1] + " - Empats: " + equip[i][2] + " - Derrotes: " + equip[i][3] + " - PTS: " + equip[i][4]);
-        }
+
 
     }
 
-    private static void mostrarClassificacio(){
+    private static void mostrarClassificacio(int[][]equip, String[]nombreEquips){
         //TODO MSTRAR LA CLASSIFICACIÓ SEPARA PER CADA GRUP I ORDENADA PER PUNTS.
+
+        int contadorLineas = 1;
+        for (int i = 0; i < equip.length; i++) {
+            System.out.println(nombreEquips[i] + " - Victories: " + equip[i][1] + " - Empats: " + equip[i][2] + " - Derrotes: " + equip[i][3] + " - PTS: " + equip[i][4]);
+
+            if (contadorLineas % 4 == 0){
+                System.out.println(" ");
+            }
+            contadorLineas++;
+        }
+    }
+
+    private static ArrayList<String> sorteigVuitens(int[][] equip, String[]nombreEquips, ArrayList<String> bombo1Vuitens, ArrayList<String> bombo2Vuitens){
+        //TODO FER METODE. MATRIU<> QUE GUARDI ELS EQUIPS CLASSIFICATS
+        //FER QUE ELS PRIMERS VAGIN DE 0AL7 Y ELS SEGONS DEL 8 AL 15 PER FER RANDOM DEL 1 AL 7 Y RANDOM DEL 8AAL15
+        //TODO SORTEIG DELS GRUPS
+        int contador = 0;
+        do {
+
+
+        for (int i = 0; i <= 3; i++) {
+
+
+        if ((equip[i][4] >= equip[0][4] && equip[i][4] >= equip[1][4] && equip[i][4] >= equip[2][4] && equip[i][4] >= equip[3][4]) && contador == 0)
+            {
+            bombo1Vuitens.add(nombreEquips[i]);
+            equip[i][4] = 0;
+            contador++;
+
+        } else if (((equip[i][4] >= equip[0][4] && equip[i][4] >= equip[1][4] && equip[i][4] >= equip[2][4] && equip[i][4] >= equip[3][4]) && contador == 1)) {
+            bombo2Vuitens.add(nombreEquips[i]);
+            contador++;
+        }
+        }}while (contador < 2);
+
+        contador = 0;
+        do {
+
+
+        for (int i = 4; i < 8; i++) {
+
+
+            if ((equip[i][4] >= equip[4][4] && equip[i][4] >= equip[5][4] && equip[i][4] >= equip[6][4] && equip[i][4] >= equip[7][4]) && contador == 0)
+            {
+                bombo1Vuitens.add(nombreEquips[i]);
+                equip[i][4] = 0;
+                contador++;
+
+            } else if ((equip[i][4] >= equip[4][4] && equip[i][4] >= equip[5][4] && equip[i][4] >= equip[6][4] && equip[i][4] >= equip[7][4]) && contador == 1) {
+                bombo2Vuitens.add(nombreEquips[i]);
+                contador++;
+            }
+        }}while (contador < 2);
+
+        contador = 0;
+        do {
+        for (int i = 8; i < 12; i++) {
+
+
+            if ((equip[i][4] >= equip[8][4] && equip[i][4] >= equip[9][4] && equip[i][4] >= equip[10][4] && equip[i][4] >= equip[11][4]) && contador == 0)
+            {
+                bombo1Vuitens.add(nombreEquips[i]);
+                equip[i][4] = 0;
+                contador++;
+
+            } else if (((equip[i][4] >= equip[8][4] && equip[i][4] >= equip[9][4] && equip[i][4] >= equip[10][4] && equip[i][4] >= equip[11][4]) && contador == 1)) {
+                bombo2Vuitens.add(nombreEquips[i]);
+                contador++;
+            }
+
+        } }while (contador < 2);
+
+        contador = 0;
+        do {
+        for (int i = 12; i < 16; i++) {
+
+
+            if ((equip[i][4] >= equip[12][4] && equip[i][4] >= equip[13][4] && equip[i][4] >= equip[14][4] && equip[i][4] >= equip[15][4]) && contador == 0)
+            {
+                bombo1Vuitens.add(nombreEquips[i]);
+                equip[i][4] = 0;
+                contador++;
+
+            } else if ((equip[i][4] >= equip[12][4] && equip[i][4] >= equip[13][4] && equip[i][4] >= equip[14][4] && equip[i][4] >= equip[15][4]) && contador == 1) {
+                bombo2Vuitens.add(nombreEquips[i]);
+                contador++;
+
+            }
+        }}while (contador < 2);
+
+        contador = 0;
+
+        do {
+        for (int i = 16; i < 20; i++) {
+
+
+            if ((equip[i][4] >= equip[16][4] && equip[i][4] >= equip[17][4] && equip[i][4] >= equip[18][4] && equip[i][4] >= equip[19][4]) && contador == 0)
+            {
+                bombo1Vuitens.add(nombreEquips[i]);
+                equip[i][4] = 0;
+                contador++;
+
+            }else if ((equip[i][4] >= equip[16][4] && equip[i][4] >= equip[17][4] && equip[i][4] >= equip[18][4] && equip[i][4] >= equip[19][4]) && contador == 1){
+                bombo2Vuitens.add(nombreEquips[i]);
+                contador++;
+            }
+        }}while (contador < 2);
+
+        contador = 0;
+        do {
+        for (int i = 20; i < 24; i++) {
+
+
+            if ((equip[i][4] >= equip[20][4] && equip[i][4] >= equip[21][4] && equip[i][4] >= equip[22][4] && equip[i][4] >= equip[23][4]) && contador == 0)
+            {
+                bombo1Vuitens.add(nombreEquips[i]);
+                equip[i][4] = 0;
+                contador++;
+
+            }else if ((equip[i][4] >= equip[20][4] && equip[i][4] >= equip[21][4] && equip[i][4] >= equip[22][4] && equip[i][4] >= equip[23][4]) && contador == 1){
+                bombo2Vuitens.add(nombreEquips[i]);
+                contador++;
+            }
+        }}while (contador < 2);
+
+        contador = 0;
+        do {
+        for (int i = 24; i < 28; i++) {
+
+
+            if ((equip[i][4] >= equip[24][4] && equip[i][4] >= equip[25][4] && equip[i][4] >= equip[26][4] && equip[i][4] >= equip[27][4]) && contador == 0)
+            {
+                bombo1Vuitens.add(nombreEquips[i]);
+                equip[i][4] = 0;
+                contador++;
+
+            } else if ((equip[i][4] >= equip[24][4] && equip[i][4] >= equip[25][4] && equip[i][4] >= equip[26][4] && equip[i][4] >= equip[27][4]) && contador == 1) {
+                bombo2Vuitens.add(nombreEquips[i]);
+                contador++;
+            }
+        }}while (contador < 2);
+
+        contador = 0;
+        do {
+        for (int i = 28; i < equip.length; i++) {
+
+
+            if ((equip[i][4] >= equip[28][4] && equip[i][4] >= equip[29][4] && equip[i][4] >= equip[30][4] && equip[i][4] >= equip[31][4]) && contador == 0)
+            {
+                bombo1Vuitens.add(nombreEquips[i]);
+                equip[i][4] = 0;
+                contador++;
+
+            } else if ((equip[i][4] >= equip[28][4] && equip[i][4] >= equip[29][4] && equip[i][4] >= equip[30][4] && equip[i][4] >= equip[31][4]) && contador == 1){
+                bombo2Vuitens.add(nombreEquips[i]);
+                contador++;
+            }
+        }}while (contador < 2);
+
+
+
+        for (int i=0; i<bombo1Vuitens.size();i++){
+            System.out.println(bombo1Vuitens.get(i));
+        }
+        return bombo1Vuitens;
     }
 
 
@@ -1070,13 +1126,340 @@ return presupost;
 
         }
     }
-    public static int sorteigGrups(){
+    public static void sorteigVuitens(ArrayList<String>bombo1Vuitens, ArrayList<String>bombo2Vuitens){
         //TODO mostrar el grups ordenats per punts
         //TODO dividir els equips en 2 bombos, els primers i segons de cada grup
         //TODO fer un métode per fer el sorteigs de vuitens de final
 
-        return 0;
+        Collections.shuffle(bombo1Vuitens);
+        Collections.shuffle(bombo2Vuitens);
+        for (int i = 0; i < bombo1Vuitens.size(); i++) {
+            System.out.println(bombo1Vuitens.get(i)+ " VS "+ bombo2Vuitens.get(i)+"\n");
+        }
+
+
     }
+
+    public static String[] calcularGuanyadorVuitens(ArrayList<String>bombo1Vuitens, ArrayList<String>bombo2Vuitens, String[]bomboQuarts){
+
+        int min = 0;
+        int max = 5;
+        int golsEquipLocalAnada = 0;
+        int golsEquipVisitantAnada = 0;
+
+        int golsEquipLocalTornada = 0;
+        int golsEquipVisitantlTornada = 0;
+
+
+
+
+        //Si no funciona usar un vector normal.
+        for (int i = 0; i < bomboQuarts.length; i++) {
+            golsEquipLocalTornada = 0;
+            golsEquipLocalTornada = 0;
+            golsEquipVisitantAnada = 0;
+            golsEquipVisitantlTornada = 0;
+
+            //Anada
+
+            System.out.println(bombo1Vuitens.get(i)+ " VS "+bombo2Vuitens.get(i));
+            golsEquipLocalAnada = getRandomNumberUsingNextInt(min,max);
+            golsEquipVisitantAnada = getRandomNumberUsingNextInt(min,max);
+            System.out.println(golsEquipLocalAnada+" - "+ golsEquipVisitantAnada);
+
+            //Tornada
+            golsEquipLocalTornada = getRandomNumberUsingNextInt(min,max);
+            golsEquipVisitantlTornada = getRandomNumberUsingNextInt(min,max);
+            System.out.println(golsEquipLocalTornada+" - "+ golsEquipVisitantlTornada);
+
+
+        //Local Win
+        if (golsEquipLocalAnada+golsEquipLocalTornada >= golsEquipVisitantAnada + golsEquipVisitantlTornada){
+            System.out.println("Ha guanyat "+bombo1Vuitens.get(i) + (golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+           bomboQuarts[i] = bombo1Vuitens.get(i);
+        //Visitant Win
+        } else if (golsEquipLocalAnada + golsEquipLocalTornada < golsEquipVisitantAnada + golsEquipVisitantlTornada) {
+            System.out.println("Ha guanyat "+bombo2Vuitens.get(i)+(golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+            bomboQuarts[i] = bombo2Vuitens.get(i);
+        }
+    }
+        for (int i = 0; i < bomboQuarts.length; i++) {
+
+
+        System.out.println("Els equips classificats són: "+bomboQuarts[i]);
+    }
+
+        return bomboQuarts;
+    }
+
+    public static void sorteigQuarts(String[] bomboQuarts){
+        System.out.println("Enfrentaments quarts de final: ");
+        for (int i = 0; i < bomboQuarts.length; i+=2) {
+            System.out.println(bomboQuarts[i]+" VS "+ bomboQuarts[i+1]);
+        }
+
+
+    }
+    public static void calcularGuanyadorQuarts(String[]bomboQuarts, String[]bomboSemis){
+        int min = 0;
+        int max = 5;
+        int golsEquipLocalAnada = 0;
+        int golsEquipVisitantAnada = 0;
+
+        int golsEquipLocalTornada = 0;
+        int golsEquipVisitantlTornada = 0;
+
+        //Partit1
+
+            golsEquipLocalTornada = 0;
+            golsEquipLocalTornada = 0;
+            golsEquipVisitantAnada = 0;
+            golsEquipVisitantlTornada = 0;
+
+
+        //Anada
+
+        System.out.println(bomboQuarts[0]+ " VS "+bomboQuarts[1]);
+        golsEquipLocalAnada = getRandomNumberUsingNextInt(min,max);
+        golsEquipVisitantAnada = getRandomNumberUsingNextInt(min,max);
+        System.out.println(golsEquipLocalAnada+" - "+ golsEquipVisitantAnada);
+
+        //Tornada
+        golsEquipLocalTornada = getRandomNumberUsingNextInt(min,max);
+        golsEquipVisitantlTornada = getRandomNumberUsingNextInt(min,max);
+        System.out.println(golsEquipLocalTornada+" - "+ golsEquipVisitantlTornada);
+
+            //Local Win
+            if (golsEquipLocalAnada+golsEquipLocalTornada >= golsEquipVisitantAnada + golsEquipVisitantlTornada){
+                System.out.println("Ha guanyat "+bomboQuarts[0] + (golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+                bomboSemis[0] = bomboQuarts[0];
+                //Visitant Win
+            } else if (golsEquipLocalAnada + golsEquipLocalTornada < golsEquipVisitantAnada + golsEquipVisitantlTornada) {
+                System.out.println("Ha guanyat "+bomboQuarts[1]+(golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+                bomboSemis[0] = bomboQuarts[1];
+            }
+
+
+            //Partit
+        golsEquipLocalTornada = 0;
+        golsEquipLocalTornada = 0;
+        golsEquipVisitantAnada = 0;
+        golsEquipVisitantlTornada = 0;
+
+
+        //Anada
+
+        System.out.println(bomboQuarts[2]+ " VS "+bomboQuarts[3]);
+        golsEquipLocalAnada = getRandomNumberUsingNextInt(min,max);
+        golsEquipVisitantAnada = getRandomNumberUsingNextInt(min,max);
+        System.out.println(golsEquipLocalAnada+" - "+ golsEquipVisitantAnada);
+
+        //Tornada
+        golsEquipLocalTornada = getRandomNumberUsingNextInt(min,max);
+        golsEquipVisitantlTornada = getRandomNumberUsingNextInt(min,max);
+        System.out.println(golsEquipLocalTornada+" - "+ golsEquipVisitantlTornada);
+
+        //Local Win
+        if (golsEquipLocalAnada+golsEquipLocalTornada >= golsEquipVisitantAnada + golsEquipVisitantlTornada){
+            System.out.println("Ha guanyat "+bomboQuarts[2] + (golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+            bomboSemis[1] = bomboQuarts[2];
+            //Visitant Win
+        } else if (golsEquipLocalAnada + golsEquipLocalTornada < golsEquipVisitantAnada + golsEquipVisitantlTornada) {
+            System.out.println("Ha guanyat "+bomboQuarts[3]+(golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+            bomboSemis[1] = bomboQuarts[3];
+        }
+
+        //Partit3
+        golsEquipLocalTornada = 0;
+        golsEquipLocalTornada = 0;
+        golsEquipVisitantAnada = 0;
+        golsEquipVisitantlTornada = 0;
+
+
+        //Anada
+
+        System.out.println(bomboQuarts[4]+ " VS "+bomboQuarts[5]);
+        golsEquipLocalAnada = getRandomNumberUsingNextInt(min,max);
+        golsEquipVisitantAnada = getRandomNumberUsingNextInt(min,max);
+        System.out.println(golsEquipLocalAnada+" - "+ golsEquipVisitantAnada);
+
+        //Tornada
+        golsEquipLocalTornada = getRandomNumberUsingNextInt(min,max);
+        golsEquipVisitantlTornada = getRandomNumberUsingNextInt(min,max);
+        System.out.println(golsEquipLocalTornada+" - "+ golsEquipVisitantlTornada);
+
+        //Local Win
+        if (golsEquipLocalAnada+golsEquipLocalTornada >= golsEquipVisitantAnada + golsEquipVisitantlTornada){
+            System.out.println("Ha guanyat "+bomboQuarts[4] + (golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+            bomboSemis[2] = bomboQuarts[4];
+            //Visitant Win
+        } else if (golsEquipLocalAnada + golsEquipLocalTornada < golsEquipVisitantAnada + golsEquipVisitantlTornada) {
+            System.out.println("Ha guanyat "+bomboQuarts[5]+(golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+            bomboSemis[2] = bomboQuarts[5];
+        }
+
+        golsEquipLocalTornada = 0;
+        golsEquipLocalTornada = 0;
+        golsEquipVisitantAnada = 0;
+        golsEquipVisitantlTornada = 0;
+
+
+        //Anada
+
+        System.out.println(bomboQuarts[6]+ " VS "+bomboQuarts[7]);
+        golsEquipLocalAnada = getRandomNumberUsingNextInt(min,max);
+        golsEquipVisitantAnada = getRandomNumberUsingNextInt(min,max);
+        System.out.println(golsEquipLocalAnada+" - "+ golsEquipVisitantAnada);
+
+        //Tornada
+        golsEquipLocalTornada = getRandomNumberUsingNextInt(min,max);
+        golsEquipVisitantlTornada = getRandomNumberUsingNextInt(min,max);
+        System.out.println(golsEquipLocalTornada+" - "+ golsEquipVisitantlTornada);
+
+        //Local Win
+        if (golsEquipLocalAnada+golsEquipLocalTornada >= golsEquipVisitantAnada + golsEquipVisitantlTornada){
+            System.out.println("Ha guanyat "+bomboQuarts[6] + (golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+            bomboSemis[3] = bomboQuarts[6];
+            //Visitant Win
+        } else if (golsEquipLocalAnada + golsEquipLocalTornada < golsEquipVisitantAnada + golsEquipVisitantlTornada) {
+            System.out.println("Ha guanyat "+bomboQuarts[7]+(golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+            bomboSemis[3] = bomboQuarts[7];
+        }
+
+
+
+
+
+
+
+        for (int i = 0; i < bomboSemis.length; i++) {
+            System.out.println(bomboSemis[i]);
+        }
+    }
+
+    private static void enfrontamentSemis(String[]bomboSemis){
+        System.out.println(bomboSemis[0]+" VS "+bomboSemis[3]);
+        System.out.println(" ");
+        System.out.println(bomboSemis[1]+" VS "+bomboSemis[2]);
+    }
+
+    private static String[] calcularSemis(String[]bomboSemis,String[]bomboFinal){
+        int min = 0;
+        int max = 5;
+        int golsEquipLocalAnada = 0;
+        int golsEquipVisitantAnada = 0;
+
+        int golsEquipLocalTornada = 0;
+        int golsEquipVisitantlTornada = 0;
+
+        //Partit1
+
+        golsEquipLocalTornada = 0;
+        golsEquipLocalTornada = 0;
+        golsEquipVisitantAnada = 0;
+        golsEquipVisitantlTornada = 0;
+
+
+        //Anada
+
+        System.out.println(bomboSemis[0]+ " VS "+bomboSemis[3]);
+        golsEquipLocalAnada = getRandomNumberUsingNextInt(min,max);
+        golsEquipVisitantAnada = getRandomNumberUsingNextInt(min,max);
+        System.out.println(golsEquipLocalAnada+" - "+ golsEquipVisitantAnada);
+
+        //Tornada
+        golsEquipLocalTornada = getRandomNumberUsingNextInt(min,max);
+        golsEquipVisitantlTornada = getRandomNumberUsingNextInt(min,max);
+        System.out.println(golsEquipLocalTornada+" - "+ golsEquipVisitantlTornada);
+
+        //Local Win
+        if (golsEquipLocalAnada+golsEquipLocalTornada >= golsEquipVisitantAnada + golsEquipVisitantlTornada){
+            System.out.println("Ha guanyat "+bomboSemis[0] + (golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+            bomboFinal[0] = bomboSemis[0];
+            //Visitant Win
+        } else if (golsEquipLocalAnada + golsEquipLocalTornada < golsEquipVisitantAnada + golsEquipVisitantlTornada) {
+            System.out.println("Ha guanyat "+bomboSemis[3]+(golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+            bomboFinal[0] = bomboSemis[3];
+        }
+        //Partit1
+
+        golsEquipLocalTornada = 0;
+        golsEquipLocalTornada = 0;
+        golsEquipVisitantAnada = 0;
+        golsEquipVisitantlTornada = 0;
+
+
+        //Anada
+
+        System.out.println(bomboSemis[1]+ " VS "+bomboSemis[2]);
+        golsEquipLocalAnada = getRandomNumberUsingNextInt(min,max);
+        golsEquipVisitantAnada = getRandomNumberUsingNextInt(min,max);
+        System.out.println(golsEquipLocalAnada+" - "+ golsEquipVisitantAnada);
+
+        //Tornada
+        golsEquipLocalTornada = getRandomNumberUsingNextInt(min,max);
+        golsEquipVisitantlTornada = getRandomNumberUsingNextInt(min,max);
+        System.out.println(golsEquipLocalTornada+" - "+ golsEquipVisitantlTornada);
+
+        //Local Win
+        if (golsEquipLocalAnada+golsEquipLocalTornada >= golsEquipVisitantAnada + golsEquipVisitantlTornada){
+            System.out.println("Ha guanyat "+bomboSemis[1] + (golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+            bomboFinal[1] = bomboSemis[1];
+            //Visitant Win
+        } else if (golsEquipLocalAnada + golsEquipLocalTornada < golsEquipVisitantAnada + golsEquipVisitantlTornada) {
+            System.out.println("Ha guanyat "+bomboSemis[2]+(golsEquipLocalAnada+golsEquipLocalTornada)+ "-"+(golsEquipVisitantAnada+golsEquipVisitantlTornada));
+            bomboFinal[1] = bomboSemis[2];
+        }
+        return bomboFinal;
+    }
+
+    private static String calcularFinal(String[]bomboFinal){
+        int min = 0;
+        int max = 5;
+        int golsEquipLocal = 0;
+        int golsEquipVisitant = 0;
+        String guanyadorChampions = " ";
+        int penalsLocal = 0;
+        int penalsVisitant = 0;
+
+
+        //Anada
+
+        System.out.println(bomboFinal[0]+ " VS "+bomboFinal[1]);
+        golsEquipLocal = getRandomNumberUsingNextInt(min,max);
+        golsEquipVisitant = getRandomNumberUsingNextInt(min,max);
+        System.out.println(golsEquipLocal+" - "+ golsEquipVisitant);
+
+
+        //Local Win
+        if (golsEquipLocal > golsEquipVisitant){
+            System.out.println("Ha guanyat "+bomboFinal[0] +" "+ (golsEquipLocal)+ "-"+(golsEquipVisitant));
+            guanyadorChampions = bomboFinal[0];
+            //Visitant Win
+        } else if (golsEquipLocal < golsEquipVisitant) {
+            System.out.println("Ha guanyat "+bomboFinal[1]+ " "+(golsEquipLocal)+ "-"+(golsEquipVisitant));
+            guanyadorChampions = bomboFinal[1];
+        }else {
+            do {
+
+
+            min = 0;
+            max = 1000;
+            penalsLocal = getRandomNumberUsingNextInt(min,max);
+            penalsVisitant = getRandomNumberUsingNextInt(min,max);
+            if (penalsLocal > penalsVisitant){
+                guanyadorChampions = bomboFinal[0];
+            } else if (penalsLocal < penalsVisitant) {
+                guanyadorChampions = bomboFinal[2];
+
+            }
+        }while (penalsLocal != penalsVisitant);
+        }
+        System.out.println("L'equip "+guanyadorChampions+"és el campió de la UEFA Champions League 22-23");
+        return guanyadorChampions;
+
+    }
+
 
 
 }
